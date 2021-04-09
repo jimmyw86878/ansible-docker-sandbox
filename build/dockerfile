@@ -1,0 +1,23 @@
+FROM centos:centos7
+
+RUN yum install epel-release -y
+RUN yum install ansible -y
+RUN yum install openssh-server openssh-clients -y 
+RUN yum install expect -y 
+
+RUN /bin/echo "123456" | passwd --stdin root
+
+RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key \
+    && ssh-keygen -t rsa -f /etc/ssh/ssh_host_ecdsa_key \
+    && ssh-keygen -t rsa -f /etc/ssh/ssh_host_ed25519_key
+
+RUN /bin/sed -i 's/.*session.*required.*pam_loginuid.so.*/session optional pam_loginuid.so/g' /etc/pam.d/sshd \
+    && /bin/sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config \
+    && /bin/sed -i "s/#UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config
+
+RUN ssh-keygen -q -t rsa -N '' <<< ""$'\n'"y" 2>&1 >/dev/null
+COPY tools/ssh-copy-expect /root/
+
+EXPOSE 22
+
+CMD ["/usr/sbin/sshd","-D"]

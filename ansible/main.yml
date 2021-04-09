@@ -1,0 +1,9 @@
+---
+- name: test area
+  hosts: ansible
+  tasks:
+    - name: get hostname
+      command: "hostname"
+      register: cmd_res
+    - debug:
+        msg: "{{ cmd_res.stdout  }}"
