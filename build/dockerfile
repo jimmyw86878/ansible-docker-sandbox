@@ -2,7 +2,7 @@ FROM centos:centos7
 
 RUN yum install epel-release -y
 RUN yum install ansible -y
-RUN yum install openssh-server openssh-clients -y 
+RUN yum install openssh-server openssh-clients net-tools -y 
 RUN yum install expect -y 
 
 RUN /bin/echo "123456" | passwd --stdin root
