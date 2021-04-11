@@ -1,6 +1,6 @@
 ## Description
 
-This repository can create [Ansible](https://docs.ansible.com/ansible/latest/index.html) cluster (one master and multiple slaves) for testing, scaling, learning your Ansible playbooks. Just use a simple command to set up multiple containerized Ansible hosts in one minute and you can run your playbooks of Ansible.
+This repository can create [Ansible](https://docs.ansible.com/ansible/latest/index.html) cluster (one master and multiple slaves) for testing, scaling and learning your Ansible playbooks. Just use a simple command to set up multiple containerized Ansible hosts in one minute and you can run your playbooks of Ansible.
 
 All SSH configuration will be pre-configured for the usage of Ansible. Users don't need to care about it.
 
